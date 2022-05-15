@@ -3,6 +3,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { createChart } from 'lightweight-charts';
+import "./CryptoInfo.css"
 
 
 class CryptoInfo extends React.Component {
@@ -19,6 +20,22 @@ class CryptoInfo extends React.Component {
     const data = await this.getData(range)
     serie.setData(data);
     chart.timeScale().fitContent();
+    range>1 ? chart.applyOptions({
+      timeScale: {
+        timeVisible: false
+      }
+    }) 
+    :
+    chart.applyOptions({
+      timeScale: {
+        timeVisible: true
+      }
+    })
+    range==='max' && chart.applyOptions({
+      timeScale: {
+        timeVisible: false
+      }
+    }) 
   }
   getData(range) {
     return new Promise(resolve => {
@@ -34,10 +51,12 @@ class CryptoInfo extends React.Component {
     const chartOptions = {
       layout: { textColor: 'black', background: { type: 'solid', color: 'white' } },
       timeScale: {
-        timeVisible: true
+        timeVisible: true,
+        fixRightEdge: true,
+        fixLeftEdge: true
       }
     };
-    this.chart = createChart(document.body, chartOptions);
+    this.chart = createChart(document.querySelector('#container'), chartOptions);
     this.lineSeries = this.chart.addLineSeries({ color: '#2962FF' });
     this.setchartdata(30,this.lineSeries, this.chart);
   }
@@ -130,8 +149,8 @@ class CryptoInfo extends React.Component {
           <button onClick={() => { this.setchartdata(7,this.lineSeries, this.chart) }}>Week</button>
           <button onClick={() => { this.setchartdata(30,this.lineSeries, this.chart) }}>Month</button>
           <button onClick={() => { this.setchartdata(90,this.lineSeries, this.chart) }}>Trimester</button>
-
-
+          <button onClick={() => { this.setchartdata(365,this.lineSeries, this.chart) }}>Year</button>
+          <button onClick={() => { this.setchartdata('max',this.lineSeries, this.chart) }}>Max</button>
         </div>
         <div id="container"></div>
       </div>
