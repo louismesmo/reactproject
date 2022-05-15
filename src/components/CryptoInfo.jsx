@@ -84,8 +84,9 @@ this.chart();
     .then(res => {
         console.log(res.data)
         const info = res.data;
-      this.setState({ info });
-      this.render();
+      this.setState({ info },()=>{
+        this.render();
+      });
     })
 }
 
