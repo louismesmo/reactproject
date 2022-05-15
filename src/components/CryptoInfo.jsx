@@ -13,72 +13,38 @@ class CryptoInfo extends React.Component {
       info: []
     };
 
+
   }
-  chart() {
-    const chartOptions = { layout: { textColor: 'black', background: { type: 'solid', color: 'white' } } };
-    const chart = createChart(document.body, chartOptions);
-    const lineSeries = chart.addLineSeries({ color: '#2962FF' });
-    const apicall = [{
-      "prices": [
-        [
-          1651708800000,
-          39699.02404125388
-        ],
-        [
-          1651795200000,
-          36612.229548803036
-        ],
-        [
-          1651881600000,
-          36116.394294982965
-        ],
-        [
-          1651968000000,
-          35573.31019883488
-        ],
-        [
-          1652054400000,
-          34070.31219757961
-        ],
-        [
-          1652140800000,
-          30269.586956629482
-        ],
-        [
-          1652227200000,
-          31026.93386836242
-        ],
-        [
-          1652313600000,
-          28913.48836365432
-        ],
-        [
-          1652400000000,
-          29126.11597686014
-        ],
-        [
-          1652486400000,
-          29310.728959858257
-        ],
-        [
-          1652567094000,
-          29752.876106780015
-        ]
-      ]
-    }]
-    var data = apicall[0]['prices'].map((pair) => {
-      var date = new Date(pair[0]);
-      var year = date.getFullYear();
-      var month = date.getMonth().toString().padStart(2,0);
-      var day = date.getDate().toString().padStart(2,0);
-      var formattedTime = year + '-' + month + '-' + day;
-      return { time:formattedTime, value: pair[1] }
-    });
-    lineSeries.setData(data);
+  async setchartdata(range, serie, chart){
+    const data = await this.getData(range)
+    serie.setData(data);
     chart.timeScale().fitContent();
   }
+  getData(range) {
+    return new Promise(resolve => {
+      axios.get('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=' + range).then(res => {
+        var apicall = res.data
+        resolve(apicall.prices.map((pair) => {
+          return { time: pair[0] / 1000, value: pair[1] }
+        }))
+      })
+    })
+  }
+  async newchart(range) {
+    const chartOptions = {
+      layout: { textColor: 'black', background: { type: 'solid', color: 'white' } },
+      timeScale: {
+        timeVisible: true
+      }
+    };
+    this.chart = createChart(document.body, chartOptions);
+    this.lineSeries = this.chart.addLineSeries({ color: '#2962FF' });
+    this.setchartdata(30,this.lineSeries, this.chart);
+  }
+  
   componentDidMount() {
-    this.chart();
+
+    this.newchart(30);
 
     axios.get('https://api.coingecko.com/api/v3/coins/' + this.props.coinid['coinid'])
       .then(res => {
@@ -160,6 +126,10 @@ class CryptoInfo extends React.Component {
 
         <div className="chart">
           <h2>Historical Data Price Chart</h2>
+          <button onClick={() => { this.setchartdata(1,this.lineSeries, this.chart) }}>24h</button>
+          <button onClick={() => { this.setchartdata(7,this.lineSeries, this.chart) }}>Week</button>
+          <button onClick={() => { this.setchartdata(30,this.lineSeries, this.chart) }}>Month</button>
+          <button onClick={() => { this.setchartdata(90,this.lineSeries, this.chart) }}>Trimester</button>
 
 
         </div>
