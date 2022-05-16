@@ -2,9 +2,8 @@ import React from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { createChart } from 'lightweight-charts';
 import "./CryptoInfo.css"
-
+import CryptoChart from './CryptoChart';
 
 class CryptoInfo extends React.Component {
   constructor(props) {
@@ -13,57 +12,9 @@ class CryptoInfo extends React.Component {
     this.state = {
       info: []
     };
+  }
 
-
-  }
-  async setchartdata(range, serie, chart){
-    const data = await this.getData(range)
-    serie.setData(data);
-    chart.timeScale().fitContent();
-    range>1 ? chart.applyOptions({
-      timeScale: {
-        timeVisible: false
-      }
-    }) 
-    :
-    chart.applyOptions({
-      timeScale: {
-        timeVisible: true
-      }
-    })
-    range==='max' && chart.applyOptions({
-      timeScale: {
-        timeVisible: false
-      }
-    }) 
-  }
-  getData(range) {
-    return new Promise(resolve => {
-      axios.get('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=' + range).then(res => {
-        var apicall = res.data
-        resolve(apicall.prices.map((pair) => {
-          return { time: pair[0] / 1000, value: pair[1] }
-        }))
-      })
-    })
-  }
-  async newchart(range) {
-    const chartOptions = {
-      layout: { textColor: 'black', background: { type: 'solid', color: 'white' } },
-      timeScale: {
-        timeVisible: true,
-        fixRightEdge: true,
-        fixLeftEdge: true
-      }
-    };
-    this.chart = createChart(document.querySelector('#container'), chartOptions);
-    this.lineSeries = this.chart.addLineSeries({ color: '#2962FF' });
-    this.setchartdata(30,this.lineSeries, this.chart);
-  }
-  
   componentDidMount() {
-
-    this.newchart(30);
 
     axios.get('https://api.coingecko.com/api/v3/coins/' + this.props.coinid['coinid'])
       .then(res => {
@@ -143,16 +94,7 @@ class CryptoInfo extends React.Component {
         </div>
 
 
-        <div className="chart">
-          <h2>Historical Data Price Chart</h2>
-          <button onClick={() => { this.setchartdata(1,this.lineSeries, this.chart) }}>24h</button>
-          <button onClick={() => { this.setchartdata(7,this.lineSeries, this.chart) }}>Week</button>
-          <button onClick={() => { this.setchartdata(30,this.lineSeries, this.chart) }}>Month</button>
-          <button onClick={() => { this.setchartdata(90,this.lineSeries, this.chart) }}>Trimester</button>
-          <button onClick={() => { this.setchartdata(365,this.lineSeries, this.chart) }}>Year</button>
-          <button onClick={() => { this.setchartdata('max',this.lineSeries, this.chart) }}>Max</button>
-        </div>
-        <div id="container"></div>
+        <CryptoChart />
       </div>
 
     );
