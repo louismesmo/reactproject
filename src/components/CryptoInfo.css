@@ -1,5 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --body-bg-color: #ffffff;
+  --text-color: #242424;
+  --title-color: #e9ab00;
+  --form-color: #a8a8a8;
+  --bg-button-color: #ff9100;
+  --bg-button-hover: #5c5c5c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
 #container {
-    width: 100%;
-    height: 600px;
-    overflow: hidden;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+}
+
+.logo {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.name {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+
+.current {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 15px;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+}
+
+.buttonswrapper {
+  margin-left: 33rem; /*esqueci como centralizar (gambiarra) */
+}
+
+.buttonTrade #bTrade {
+  background: var(--bg-button-color);
+  border: none;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+  width: fit-content;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  text-decoration: none;
+  transition: background 200ms;
+}
+
+.buttonTrade #bTrade:hover {
+  background-color: var(--bg-button-hover);
 }
