@@ -1,103 +1,96 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 :root {
-    --body-bg-color: #ffffff;
-    --text-color: #242424;
-    --title-color: #e9ab00;
-    --form-color: #a8a8a8;
-    --bg-button-color: #ff9100;
-    --bg-button-hover: #5c5c5c;
+  --body-bg-color: rgb(20, 25, 36);
+  --header-bg: rgb(41, 49, 66);
+  --button-bg1: rgb(74, 191, 187);
+  --bg-table: rgb(41, 49, 67);
+  --bg-table-hover: rgb(49, 58, 80);
+  --text-color: #ffff;
+  --bg-button-hover: #5c5c5c;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .logo {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
 }
 
 .name {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
 }
 
 .current {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    margin-bottom: 1rem;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 .description {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 15px;
-    color: var(--text-color);
-    margin-bottom: 2rem;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 15px;
+  color: var(--text-color);
+  margin-bottom: 2rem;
 }
 
 .buttonswrapper {
-    margin-left: 33rem;
-    /*esqueci como centralizar (gambiarra) */
 }
 
-.buttonTrade #bTrade {
-    background: var(--bg-button-color);
-    border: none;
-    border-radius: 1rem;
-    margin-bottom: 2rem;
-    padding: 1rem 2rem;
-    width: fit-content;
-    color: white;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.6rem;
-    text-decoration: none;
-    transition: background 200ms;
+.buttonTrade #bTrade,
+#bInfo {
+  background: var(--bg-button-color);
+  border: none;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+  width: fit-content;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  text-decoration: none;
+  transition: background 200ms;
 }
 
-.buttonTrade #bTrade:hover {
-    background-color: var(--bg-button-hover);
+.buttonTrade #bTrade:hover,
+#bInfo:hover {
+  background-color: var(--bg-button-hover);
 }
 
 #container {
-    width: 100%;
-    height: 600px;
-    overflow: hidden;
-    position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  position: relative;
 }
 
 .floating-tooltip-2 {
-    width: 220px;
-    height: 90px;
-    padding: 20px;
-    position: absolute;
-    display: block;
-    box-sizing: border-box;
-    font-size: 12px;
-    color: #131722;
-    text-align: left;
-    z-index: 1000;
-    pointer-events: none;
-    font-size: large;
-    background: #ffffff;
-    border: 1px solid blue;
-    border-radius: 20px;
-    opacity: 1;
+  width: 220px;
+  height: 90px;
+  padding: 20px;
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #131722;
+  text-align: left;
+  z-index: 1000;
+  pointer-events: none;
+  font-size: large;
+  background: #ffffff;
+  border: 1px solid blue;
+  border-radius: 20px;
+  opacity: 1;
 }
