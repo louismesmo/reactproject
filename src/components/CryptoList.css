@@ -62,6 +62,7 @@ body {
   border-bottom: 2px solid rgb(20, 25, 36);
   padding: 3px;
   padding: 25px 15px;
+  box-sizing: border-box;
 }
 .crypto-pair:hover {
   background-color: var(--bg-table-hover);
