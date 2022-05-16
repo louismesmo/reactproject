@@ -6,7 +6,6 @@ function App() {
 
     <div className="App">
       <Main />
-      <div style={{height: '200px'}}></div>
     </div>
   );
 }
