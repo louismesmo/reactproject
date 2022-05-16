@@ -1,0 +1,7 @@
+uppercase {
+    text-transform: uppercase;
+}
+
+.rotate90 {
+    transform: rotate(90deg);
+}

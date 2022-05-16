@@ -5,7 +5,7 @@ import { createChart } from 'lightweight-charts';
 class CryptoChart extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { price: "", date: "", top: 0, left: 0, display: 0 };
+        this.state = { range: 0, price: "", date: "", left: 0, display: 0 };
     }
     async setchartdata(range, serie, chart) {
         const data = await this.getData(range)
@@ -33,6 +33,7 @@ class CryptoChart extends React.Component {
             axios.get('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=' + range).then(res => {
                 var apicall = res.data
                 resolve(apicall.prices.map((pair) => {
+                    this.setState({range:range})
                     return { time: pair[0] / 1000, value: pair[1] }
                 }))
             })
@@ -64,26 +65,22 @@ class CryptoChart extends React.Component {
                 this.setState({ display: 0 })
                 return
             }
-            var y = param.point.y;
             var x = param.point.x;
-            var ycentage = ((y - 0) / (600 - 0)) * 100
-            var xcentage = (((x - 0) / (window.innerWidth - 0)) * 100)+2
+            var xcentage = (((x - 0) / (document.getElementById("container").offsetWidth - 0)) * 81)
             var date = new Date(param.time * 1000);
             var year = date.getFullYear();
             var month = date.getMonth().toString().padStart(2, 0);
             var day = date.getDate().toString().padStart(2, 0);
-            var formatteddate = month + '-' + day + '-' + year;
-            if(xcentage>80){
-                this.setState({ left: 80 });
+            var hour = date.getHours().toString().padStart(2, 0);
+            var minute = date.getMinutes().toString().padStart(2, 0);
+            var second = date.getSeconds().toString().padStart(2, 0);
+            var formatteddate = ''
+            if (this.state.range>1 || this.state.range==='max'){
+                formatteddate = month + '-' + day + '-' + year;
             } else {
-                this.setState({ left: xcentage });
+                formatteddate = hour + ':' + minute + ':' + second;
             }
-            if(y>480){
-                this.setState({ top: 80.5 });
-            } else {
-                this.setState({ top: ycentage });
-            }
-            this.setState({ price: param.seriesPrices.get(this.lineSeries), date: formatteddate, display: 1 });
+            this.setState({ price: param.seriesPrices.get(this.lineSeries), date: formatteddate,left: xcentage, display: 1 });
 
         });
     }
@@ -101,7 +98,7 @@ class CryptoChart extends React.Component {
                 </div>
 
                 <div id="container">
-                <span className="floating-tooltip-2" id="toolTip" style={{ top: `${this.state.top}%`, left: `${this.state.left}%`, opacity: `${this.state.display}` }}>
+                <span className="floating-tooltip-2" id="toolTip" style={{left: `${this.state.left}%`, opacity: `${this.state.display}` }}>
                     {this.state.price}<br />
                     {this.state.date}
                 </span>

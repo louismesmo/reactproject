@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import "./CryptoInfo.css"
 import CryptoChart from './CryptoChart';
-
+import CryptoSwap from "./CryptoSwap";
 class CryptoInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -95,6 +95,7 @@ class CryptoInfo extends React.Component {
 
 
         <CryptoChart />
+        <CryptoSwap value={this.state.info.tickers && this.state.info.tickers[0].last} goal={this.state.info['symbol']}/>
       </div>
 
     );
