@@ -5,7 +5,7 @@ class Header extends React.Component {
     render(){
         return(
             <>
-            <div className="header">
+            <header>
                 <div className="content">
                     <div className="logo">
                     <img src={require('../imgs/logo192.png')} alt="Site Logo"/>
@@ -14,7 +14,7 @@ class Header extends React.Component {
                         
                     </div>
                 </div>
-            </div>
+            </header>
             </>
         )
     }
