@@ -55,7 +55,7 @@ body {
 }
 
 .crypto-table {
-  padding-top: 25px;
+  padding-top: 5px;
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
@@ -64,11 +64,20 @@ body {
   row-gap: 20px;
 }
 
+.bodyContainer {
+  width: 80%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.crypto-table .tableFunctions {
+  width: 80%;
+}
+
 .elementsFilter {
   display: flex;
   width: 100%;
-  padding-top: 5px;
-  padding-left: 5px;
+  justify-content: flex-end;
 }
 .elementsFilter #filter {
   font-family: Roboto, sans-serif;
@@ -76,8 +85,11 @@ body {
   color: #ffff;
   background-color: var(--bg-table);
   filter: drop-shadow(50);
-  border-radius: 10px;
+  width: 100px;
+  height: 25px;
+  border-radius: 8px;
 }
+
 .crypto-pair {
   display: flex;
   flex-flow: row nowrap;

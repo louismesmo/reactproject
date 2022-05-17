@@ -23,21 +23,28 @@ export default class CryptoList extends React.Component {
   }
     render() {
       return (
+
 <div className='contentcontainer'>
-<div className="hero"><h2>Cryptocurrency Prices Live
-</h2><h3>Top Coins by Market Cap</h3></div>
-        <div className="crypto-table">
-          <div className="content">
-            <div className='elementsFilter'>
-              <select defaultValue={10} onChange={()=>{this.setFilter()}} id="filter">
+
+    <div className="hero"><h2>Cryptocurrency Prices Live
+              </h2><h3>Top Coins by Market Cap</h3>
+    </div>
+
+<div className='bodyContainer'>
+  <div className="crypto-table">
+        <div className='tableFunctions'>
+       <div className='elementsFilter'>
+          <select defaultValue={10} onChange={()=>{this.setFilter()}} id="filter">
                 <option value={10}>10</option>
                 <option value={25}>25</option>
                 <option value={50}>50</option>
                 <option value={100}>100</option>
-                </select>
-            </div>
-          {
-            this.state.cryptos
+            </select>
+          </div>  
+          </div>
+
+           <div className="content">
+          {this.state.cryptos
               .map(crypto =>
                 <>
                 <div className="crypto-pair" key={crypto.id}>
@@ -52,6 +59,7 @@ export default class CryptoList extends React.Component {
 
               )
           }
+          </div>
           </div>
         </div>
         
