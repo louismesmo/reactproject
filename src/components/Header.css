@@ -41,19 +41,19 @@ header .content {
 }
 
 .menu a {
-    display: block;
-    color: white;
-    height: 100%;
-    font-weight: 700;
-    font-size: large;
-    line-height: 30px;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 10px 10px;
+  font-family: Roboto, sans-serif;
+  display: block;
+  color: white;
+  height: 100%;
+  font-weight: 500;
+  line-height: 30px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 5px 5px;
 }
 
 .menu a:hover {
-    color: rgb(74, 191, 187);
-    transition: all 200ms;
-    border-bottom: 3px solid rgb(74, 191, 187);
+  color: rgb(83, 95, 255);
+  border-bottom: 1px solid rgb(83, 95, 255);
+  transition: all 300ms;
 }

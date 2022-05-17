@@ -16,31 +16,34 @@ export default class CryptoList extends React.Component {
         this.setState({ cryptos: res.data });
       })
   }
-  setFilter() {
-    this.setState({ range: document.getElementById("filter").value })
-  }
-  render() {
-    return (
-      <div className='contentcontainer'>
-        <div className="hero"><h2>Cryptocurrency Prices Live
-        </h2><h3>Top Coins by Market Cap</h3></div>
-        <div className="crypto-table">
-          <div className="content">
-            <div className='elementsFilter'>
-              <select defaultValue={10} onChange={() => { this.setFilter() }} id="filter">
+    render() {
+      return (
+
+<div className='contentcontainer'>
+
+    <div className="hero"><h2>Cryptocurrency Prices Live
+              </h2><h3>Top Coins by Market Cap</h3>
+    </div>
+
+<div className='bodyContainer'>
+  <div className="crypto-table">
+        <div className='tableFunctions'>
+       <div className='elementsFilter'>
+          <select defaultValue={10} onChange={()=>{this.setFilter()}} id="filter">
                 <option value={10}>10</option>
                 <option value={25}>25</option>
                 <option value={50}>50</option>
                 <option value={100}>100</option>
-              </select>
-            </div>
-            {
-              this.state.cryptos
-                .slice(0,this.state.range)
-                .map(crypto =>
-                  <>
-                    <div className="crypto-pair" key={crypto.id}>
-                      <div className="crypto-name">
+            </select>
+          </div>  
+          </div>
+
+           <div className="content">
+          {this.state.cryptos
+              .map(crypto =>
+                <>
+                <div className="crypto-pair" key={crypto.id}>
+                    <div className="crypto-name">
                         <div><img src={crypto.image} alt={crypto.name + " logo"}></img></div>
                         <div><Link to={"info/" + crypto.id}>{crypto.name}</Link></div>
                       </div>
@@ -51,6 +54,7 @@ export default class CryptoList extends React.Component {
 
                 )
             }
+          </div>
           </div>
         </div>
 
