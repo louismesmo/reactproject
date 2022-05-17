@@ -1,172 +1,164 @@
 :root {
-  --body-primary: rgb(40, 41, 61);
-  --bg-sections: rgb(45, 47, 69);
-  --bg-cards: rgb(55, 57, 81);
-  --bg-card-sections: #3e405b;
-  --bg-table-hover: rgb(49, 58, 80);
-
-  --accents-grape: rgb(115, 102, 254);
-  --accents-grape-lighter: rgb(161, 154, 254);
-  --accents-grape-darker: rgb(82, 24, 255);
-
-  --primary-bt-enabled: rgb(54, 67, 252);
-  --primary-bt-hover: rgb(83, 95, 255);
-  --primary-bt-pressed: rgb(68, 72, 139);
-
-  --secundary-bt-enabled: rgb(96, 100, 139);
-  --secundary-bt-hover: rgb(152, 155, 193);
-  --secundary-bt-pressed: rgb(69, 71, 90);
-
-  --gradiend-atlantic: linear-gradient(
-    90.41deg,
-    rgb(255, 255, 255) 0%,
-    rgb(62, 235, 190) 0%,
-    rgb(78, 193, 243) 0.01%,
-    rgb(104, 252, 214) 100%
-  );
-  --gradiend-pacific: linear-gradient(
-    140.48deg,
-    rgb(26, 209, 218) -8.27%,
-    rgb(74, 90, 205) 90.58%
-  );
+    --body-primary: rgb(40, 41, 61);
+    --bg-sections: rgb(45, 47, 69);
+    --bg-cards: rgb(55, 57, 81);
+    --bg-card-sections: #3e405b;
+    --bg-table-hover: rgb(49, 58, 80);
+    --accents-grape: rgb(115, 102, 254);
+    --accents-grape-lighter: rgb(161, 154, 254);
+    --accents-grape-darker: rgb(82, 24, 255);
+    --primary-bt-enabled: rgb(54, 67, 252);
+    --primary-bt-hover: rgb(83, 95, 255);
+    --primary-bt-pressed: rgb(68, 72, 139);
+    --secundary-bt-enabled: rgb(96, 100, 139);
+    --secundary-bt-hover: rgb(152, 155, 193);
+    --secundary-bt-pressed: rgb(69, 71, 90);
+    --gradiend-atlantic: linear-gradient( 90.41deg, rgb(255, 255, 255) 0%, rgb(62, 235, 190) 0%, rgb(78, 193, 243) 0.01%, rgb(104, 252, 214) 100%);
+    --gradiend-pacific: linear-gradient( 140.48deg, rgb(26, 209, 218) -8.27%, rgb(74, 90, 205) 90.58%);
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--body-primary);
+    background-color: var(--body-primary);
 }
 
 .contentcontainer {
-  padding-top: 150px;
+    padding-top: 150px;
 }
 
 .hero h2 {
-  font-family: Roboto, sans-serif;
-  color: #ffff;
-  font-size: x-large;
+    font-family: Roboto, sans-serif;
+    color: #ffff;
+    font-size: x-large;
 }
+
 .hero h3 {
-  font-family: Roboto, sans-serif;
-  color: #ffff;
-  font-size: small;
+    font-family: Roboto, sans-serif;
+    color: #ffff;
+    font-size: small;
 }
 
 .crypto-table {
-  padding-top: 5px;
-  width: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  row-gap: 20px;
+    padding-top: 5px;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    row-gap: 20px;
 }
 
 .bodyContainer {
-  width: 80%;
-  max-width: 1200px;
-  margin: auto;
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .crypto-table .tableFunctions {
-  width: 80%;
+    width: 80%;
 }
 
 .elementsFilter {
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
 }
+
 .elementsFilter #filter {
-  font-family: Roboto, sans-serif;
-  font-size: medium;
-  color: #ffff;
-  background-color: var(--bg-table);
-  filter: drop-shadow(50);
-  width: 100px;
-  height: 25px;
-  border-radius: 8px;
+    font-family: Roboto, sans-serif;
+    font-size: medium;
+    color: #ffff;
+    background-color: var(--bg-table);
+    filter: drop-shadow(50);
+    width: 100px;
+    height: 25px;
+    border-radius: 8px;
 }
 
 .crypto-pair {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  border-bottom: 2px solid var(--body-primary);
-  padding: 20px;
-  box-sizing: border-box;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 2px solid var(--body-primary);
+    padding: 20px;
+    box-sizing: border-box;
 }
+
 .crypto-pair:hover {
-  background-color: var(--primary-bt-hover);
-  transition: all 200ms;
+    background-color: var(--primary-bt-hover);
+    transition: all 200ms;
 }
+
 .crypto-pair:first-child:hover {
-  border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 0 0;
 }
 
 .crypto-pair img {
-  width: 30px;
-  height: auto;
-  margin-right: 10px;
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
 }
 
 .crypto-name {
-  font-family: Roboto, sans-serif;
-  font-weight: 300;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  text-transform: uppercase;
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    text-transform: uppercase;
 }
+
 .crypto-price {
-  color: #ffff;
-  font-family: Roboto, sans-serif;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  text-transform: uppercase;
+    color: #ffff;
+    font-family: Roboto, sans-serif;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    text-transform: uppercase;
 }
+
 .crypto-price:hover {
-  color: var(--button-bg1);
-  transition: all 200ms;
+    color: var(--button-bg1);
+    transition: all 200ms;
 }
 
 .crypto-name a {
-  text-decoration: none;
-  color: #ffff;
-  font-weight: 500;
+    text-decoration: none;
+    color: #ffff;
+    font-weight: 500;
 }
 
 .crypto-name a:hover {
-  color: var(--button-bg1);
-  transition: all 200ms;
+    color: var(--button-bg1);
+    transition: all 200ms;
 }
 
 .crypto-table .content {
-  width: 80%;
-  max-width: 1200px;
-  border: 3px solid rgb(20, 25, 36);
-  border-radius: 10px;
-  background-color: var(--bg-card-sections);
+    width: 80%;
+    max-width: 1200px;
+    border: 3px solid rgb(20, 25, 36);
+    border-radius: 10px;
+    background-color: var(--bg-card-sections);
 }
 
 .footer {
-  margin-top: 30px;
-  width: 100%;
-  height: 50px;
-  background: rgba(41, 49, 66);
+    margin-top: 30px;
+    width: 100%;
+    height: 50px;
+    background: rgba(41, 49, 66);
 }
 
 .footer h2 {
-  padding-top: 20px;
-  color: #ffff;
-  font-family: sans-serif;
-  font-weight: 300;
-  font-size: small;
+    padding-top: 20px;
+    color: #ffff;
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: small;
 }
