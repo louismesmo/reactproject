@@ -2,6 +2,7 @@
     background-color: #373951;
     border-radius: 30px;
     margin-top: 30px;
+    padding-top: 30px;
     height: 500px;
     display: flex;
     flex-flow: column nowrap;
@@ -11,7 +12,7 @@
 }
 
 .chartbuttons {
-    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     flex-flow: row nowrap;
     column-gap: 5px;
@@ -20,4 +21,30 @@
 
 .selected {
     background: rgba(110, 113, 152, 0.2);
+}
+
+@media screen and (max-width:375px) {
+    .cryptoinfo {
+        width: 100%;
+    }
+    .chartcontainer {
+        justify-content: center;
+        border-radius: 0;
+    }
+    .chartbuttons {
+        margin-left: 0px;
+        flex-direction: row;
+        column-gap: 0px;
+    }
+    .chartbuttons button {
+        padding: 25px 15px;
+        max-width: calc((95vw)/6);
+        border-radius: 0;
+    }
+    #container {
+        height: 400px;
+    }
+    .cryptoinfo .header .desc .value {
+        margin-left: 10px;
+    }
 }
