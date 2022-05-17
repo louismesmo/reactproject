@@ -12,9 +12,9 @@ class Header extends React.Component {
                     </div>
                     <div className="menu">
             <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Wallet</a></li>
-            <li><a href="#">Trade</a></li>
+            <li><a href="#Home">Home</a></li>
+            <li><a href="#Wallet">Wallet</a></li>
+            <li><a href="#Trade">Trade</a></li>
           </ul>
                     </div>
                 </div>
