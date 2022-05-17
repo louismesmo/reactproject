@@ -16,9 +16,8 @@ html,
 body {
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 }
-
-.logo {}
 
 .name {
     font-family: 'Raleway', sans-serif;
@@ -141,6 +140,11 @@ body {
     background: linear-gradient(180deg, #5561FF 0%, #3643FC 100%, #3643FC 100%);
     border-radius: 12px;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.primary-button:disabled {
+    cursor: default;
 }
 
 .primary-button:hover:enabled {
