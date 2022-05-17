@@ -1,0 +1,23 @@
+.chartcontainer {
+    background-color: #373951;
+    border-radius: 30px;
+    margin-top: 30px;
+    height: 500px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    row-gap: 10px;
+}
+
+.chartbuttons {
+    padding-top: 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 5px;
+    z-index: 3;
+}
+
+.selected {
+    background: rgba(110, 113, 152, 0.2);
+}

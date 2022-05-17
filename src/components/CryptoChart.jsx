@@ -1,13 +1,24 @@
 import React from "react";
 import axios from "axios";
 import { createChart } from 'lightweight-charts';
-
+import './CryptoChart.css';
 class CryptoChart extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { price: "", date: "", top: 0, left: 0, display: 0 };
+        this.state = { range: 0, price: "", date: "", left: 0, display: 0, active: false };
     }
-    async setchartdata(range, serie, chart) {
+    toggleButton(e) {
+        var buttons = document.getElementsByClassName('primary-button')
+        for (let b of buttons) {
+            b.classList.remove('selected')
+            b.disabled = false
+        }
+        document.getElementById(e).classList.add("selected")
+        document.getElementById(e).disabled = true;
+
+    }
+    async setchartdata(range, serie, chart, e) {
+        e && this.toggleButton(e.target.id)
         const data = await this.getData(range)
         serie.setData(data);
         chart.timeScale().fitContent();
@@ -33,6 +44,7 @@ class CryptoChart extends React.Component {
             axios.get('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=' + range).then(res => {
                 var apicall = res.data
                 resolve(apicall.prices.map((pair) => {
+                    this.setState({ range: range })
                     return { time: pair[0] / 1000, value: pair[1] }
                 }))
             })
@@ -40,16 +52,21 @@ class CryptoChart extends React.Component {
     }
     async newchart(range) {
         const chartOptions = {
-            layout: { 
-            textColor: 'black',
-            background: { type: 'solid', color: 'white' }
-        },
+            layout: {
+                textColor: 'white',
+                background: { type: 'solid', color: '#373951' }
+            },
             timeScale: {
                 timeVisible: true,
                 fixRightEdge: true,
                 fixLeftEdge: true
             },
-            
+            height: 400,
+            grid: {
+                vertLines: { visible: false },
+                horzLines: { visible: false }
+            }
+
         };
         this.chart = createChart(document.querySelector('#container'), chartOptions);
         this.lineSeries = this.chart.addLineSeries({ color: '#2962FF' });
@@ -64,49 +81,43 @@ class CryptoChart extends React.Component {
                 this.setState({ display: 0 })
                 return
             }
-            var y = param.point.y;
             var x = param.point.x;
-            var ycentage = ((y - 0) / (600 - 0)) * 100
-            var xcentage = (((x - 0) / (window.innerWidth - 0)) * 100)+2
+            var xcentage = (((x - 0) / (document.getElementById("container").offsetWidth - 0)) * 81)
             var date = new Date(param.time * 1000);
             var year = date.getFullYear();
             var month = date.getMonth().toString().padStart(2, 0);
             var day = date.getDate().toString().padStart(2, 0);
-            var formatteddate = month + '-' + day + '-' + year;
-            if(xcentage>80){
-                this.setState({ left: 80 });
+            var hour = date.getHours().toString().padStart(2, 0);
+            var minute = date.getMinutes().toString().padStart(2, 0);
+            var second = date.getSeconds().toString().padStart(2, 0);
+            var formatteddate = ''
+            if (this.state.range > 1 || this.state.range === 'max') {
+                formatteddate = month + '-' + day + '-' + year;
             } else {
-                this.setState({ left: xcentage });
+                formatteddate = hour + ':' + minute + ':' + second;
             }
-            if(y>480){
-                this.setState({ top: 80.5 });
-            } else {
-                this.setState({ top: ycentage });
-            }
-            this.setState({ price: param.seriesPrices.get(this.lineSeries), date: formatteddate, display: 1 });
+            this.setState({ price: param.seriesPrices.get(this.lineSeries), date: formatteddate, left: xcentage, display: 1 });
 
         });
     }
     render() {
         return (
-            <>
-                <div className="chart">
-                    <h2>Historical Data Price Chart</h2>
-                    <button onClick={() => { this.setchartdata(1, this.lineSeries, this.chart) }}>24h</button>
-                    <button onClick={() => { this.setchartdata(7, this.lineSeries, this.chart) }}>Week</button>
-                    <button onClick={() => { this.setchartdata(30, this.lineSeries, this.chart) }}>Month</button>
-                    <button onClick={() => { this.setchartdata(90, this.lineSeries, this.chart) }}>Trimester</button>
-                    <button onClick={() => { this.setchartdata(365, this.lineSeries, this.chart) }}>Year</button>
-                    <button onClick={() => { this.setchartdata('max', this.lineSeries, this.chart) }}>Max</button>
+            <div className="chartcontainer">
+                <div className="chartbuttons">
+                    <button className={this.state.active ? 'primary-button selected' : 'primary-button'} onClick={(e) => { this.setchartdata(1, this.lineSeries, this.chart, e) }} id="day">24h</button>
+                    <button className={this.state.active ? 'primary-button selected' : 'primary-button'} onClick={(e) => { this.setchartdata(7, this.lineSeries, this.chart, e) }} id="week">Week</button>
+                    <button className={this.state.active ? 'primary-button selected' : 'primary-button'} onClick={(e) => { this.setchartdata(30, this.lineSeries, this.chart, e) }} id="month">Month</button>
+                    <button className={this.state.active ? 'primary-button selected' : 'primary-button'} onClick={(e) => { this.setchartdata(90, this.lineSeries, this.chart, e) }} id="trimester">Trimester</button>
+                    <button className={this.state.active ? 'primary-button selected' : 'primary-button'} onClick={(e) => { this.setchartdata(365, this.lineSeries, this.chart, e) }} id="year">Year</button>
+                    <button className={this.state.active ? 'primary-button selected' : 'primary-button'} onClick={(e) => { this.setchartdata('max', this.lineSeries, this.chart, e) }} id="max">Max</button>
                 </div>
-
                 <div id="container">
-                <span className="floating-tooltip-2" id="toolTip" style={{ top: `${this.state.top}%`, left: `${this.state.left}%`, opacity: `${this.state.display}` }}>
-                    {this.state.price}<br />
-                    {this.state.date}
-                </span>
+                    <span className="floating-tooltip-2" id="toolTip" style={{ left: `${this.state.left}%`, opacity: `${this.state.display}` }}>
+                        {this.state.price}<br />
+                        {this.state.date}
+                    </span>
                 </div>
-            </>
+            </div>
         )
     }
 }
