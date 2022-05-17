@@ -2,21 +2,22 @@ import React from 'react';
 import axios from 'axios';
 import './CryptoList.css';
 import { Link } from 'react-router-dom';
-
+import LoadingComponent from './LoadingComponent';
 
 export default class CryptoList extends React.Component {
   state = {
     cryptos: [],
-    range: 10
+    range: 10,
+    ready: false
   }
-  setFilter(){
+  setFilter() {
     var r = document.getElementById('filter').value
-    this.setState({range:r})
+    this.setState({ range: r })
   }
   componentDidMount() {
-    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false')
+    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=10+0&page=1&sparkline=false')
       .then(res => {
-        this.setState({ cryptos: res.data });
+        this.setState({ cryptos: res.data, ready: true });
       })
   }
   render() {
@@ -42,6 +43,7 @@ export default class CryptoList extends React.Component {
             </div>
 
             <div className="content">
+              <LoadingComponent load={!this.state.ready}/>
               {this.state.cryptos
                 .slice(0, this.state.range)
                 .map(crypto =>
