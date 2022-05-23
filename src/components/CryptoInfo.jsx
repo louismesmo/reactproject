@@ -99,8 +99,9 @@ class CryptoInfo extends React.Component {
             <p dangerouslySetInnerHTML={{ __html: this.state.info.description && this.state.info.description['en'] }}>
             </p>
           </div>
-
+          <div className="swapContainer">
           <CryptoSwap value={this.state.info.tickers && this.state.info.tickers[0].last} goal={this.state.info['symbol']} />
+          </div>
         </div>
       </div>
 
